@@ -41,7 +41,7 @@ $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
 
-#TwitterRestAPIr Class usage
+#TwitterRestAPI Class usage
 
 Include TwitterRestAPI
 
