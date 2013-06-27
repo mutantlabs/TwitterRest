@@ -68,6 +68,12 @@ foreach($tweets as $key => $status) {
 echo json_encode($arrTweets);
 ```
 
+Note - to use getCachedUserStatus() - you need to make your apache server the owner of twitter_result.data:
+
+```bash
+sudo chown -R www-data:www-data twitter_result.data
+```
+
 Requirements
 ------------
 
