@@ -46,7 +46,7 @@ RewriteRule ^(.*)$ index.php/$1 [L]
 
 #Config
 
-rename config.sample.php to config.php
+create config.php as follows:
 
 Set your config.php (uses twitteroauth from https://github.com/abraham/twitteroauth)
 
