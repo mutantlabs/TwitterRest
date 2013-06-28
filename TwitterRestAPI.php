@@ -18,7 +18,7 @@
  *
  */
 
-namespace twitterRestAPI;
+namespace TwitterRest;
 require_once('twitteroauth/twitteroauth.php');
 require_once('config.php');
 require_once('vendor/autoload.php');

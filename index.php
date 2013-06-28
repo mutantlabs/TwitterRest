@@ -6,9 +6,9 @@
  * Time: 12:03
  */
 
-namespace twitterRestAPI;
+namespace TwitterRest;
 require "TwitterRestAPI.php";
-use twitterRestAPI\TwitterRestAPI;
+use TwitterRest\TwitterRestAPI;
 
 TwitterRestAPI::create('/')
     ->addGetRoute('', function(){

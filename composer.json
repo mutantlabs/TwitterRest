@@ -12,5 +12,10 @@
     ],
     "require": {
         "marcj/php-rest-service": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "TwitterRest": ""
+        }
     }
 }
