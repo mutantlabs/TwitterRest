@@ -118,7 +118,7 @@ TwitterRestAPI::create('/')
     ->run();
 ```
 
-#Extended Auth flow taken from https://github.com/abraham/twitteroauth
+Extended Auth flow taken from https://github.com/abraham/twitteroauth
 
 ```php
     ->addGetRoute('authenticate', function(){
