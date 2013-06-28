@@ -135,7 +135,8 @@ Extended Auth flow taken from https://github.com/abraham/twitteroauth
         })
 ```
 
-The user is now on twitter.com and may have to login. Once authenticated with Twitter they will will either have to click on allow/deny, or will be automatically redirected back to the callback in this case its example.domain.com/success
+The user is now on twitter.com and may have to login. Once authenticated with Twitter they will will either have to click on allow/deny, or will be automatically redirected back to the callback. in this case its example.domain.com/success
+
 Once the user has returned to /success and allowed access we need to build a new TwitterOAuth object using the temporary credentials.
 
 ```php
