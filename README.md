@@ -118,8 +118,56 @@ TwitterRestAPI::create('/')
     ->run();
 ```
 
+#Extended Auth flow taken from https://github.com/abraham/twitteroauth
+
+```php
+    ->addGetRoute('authenticate', function(){
+            //When a user lands on /authenticate we build a new TwitterOAuth object using the client credentials.
+            $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+
+            //Using the built $connection object you will ask Twitter for temporary credentials. The oauth_callback value is required.
+            $temporary_credentials = $connection->getRequestToken(OAUTH_CALLBACK);
+
+            //Once we have temporary credentials the user has to go to Twitter and authorize the app to access and updates their data.
+            $redirect_url = $connection->getAuthorizeURL($temporary_credentials, FALSE);
+
+            return array($temporary_credentials,$redirect_url);
+        })
+```
+
+The user is now on twitter.com and may have to login. Once authenticated with Twitter they will will either have to click on allow/deny, or will be automatically redirected back to the callback in this case its example.domain.com/success
+Once the user has returned to /success and allowed access we need to build a new TwitterOAuth object using the temporary credentials.
+
+```php
+        ->addGetRoute('success', function(){
+            $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_GET['oauth_token'],
+                $_GET['oauth_verifier']);
+
+            //Now we ask Twitter for long lasting token credentials. These are specific to the application and user and will act like password to make future requests.
+            $token_credentials = $connection->getAccessToken($_REQUEST['oauth_verifier']);
+
+            Here we can from our token credentials back to the application (i'd suggest a more secure method of sending these than encoded JSON. but here for example):
+            return array($token_credentials);
+        })
+
+```
+
+From here with the token credentials we build a new TwitterOAuth object.
+
+```php
+$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $token_credentials['oauth_token'],
+$token_credentials['oauth_token_secret']);
+```
+
+And make requests authenticated as the user:
+
+```php
+$status = $connection->post('statuses/update', array('status' => 'Text of status here', 'in_reply_to_status_id' => 123456));
+```
+
 License
 -------
 
  - Licensed under the MIT License. See the LICENSE file for more details.
  - marcj/php-rest-service is Licensed under the MIT License. See https://github.com/marcj/php-rest-service/blob/master/LICENSE for more details
+ - abraham/twitteroauth https://github.com/abraham/twitteroauth/blob/master/LICENSE

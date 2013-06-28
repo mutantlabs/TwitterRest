@@ -10,6 +10,7 @@ namespace TwitterRest;
 require_once('config.php');
 require_once('vendor/autoload.php');
 require "TwitterRest/TwitterRestAPI.php";
+use TwitterOAuth;
 use TwitterRest\TwitterRestAPI;
 
 TwitterRestAPI::create('/')
@@ -24,5 +25,19 @@ TwitterRestAPI::create('/')
             );
         }
         return $arrTweets;
+    })
+    ->addGetRoute('authenticate', function(){
+        $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET);
+        $temporary_credentials = $connection->getRequestToken(OAUTH_CALLBACK);
+        $redirect_url = $connection->getAuthorizeURL($temporary_credentials, FALSE);
+
+        return array($temporary_credentials,$redirect_url);
+    })
+    ->addGetRoute('success', function(){
+        $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $_GET['oauth_token'],
+            $_GET['oauth_verifier']);
+        $token_credentials = $connection->getAccessToken($_REQUEST['oauth_verifier']);
+
+        return array($token_credentials);
     })
     ->run();
