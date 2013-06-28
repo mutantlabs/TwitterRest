@@ -3,25 +3,13 @@ twitter-rest
 
 A simple Class to interface with Twitter API v1.1 using OAuth, and return tweets as JSON via a get method. Uses RestService and twitteroauth
 
-Config
-
-rename config.sample.php to config.php
-
-Set your config.php (from twitteroauth https://github.com/abraham/twitteroauth)
-
-```php
-define('CONSUMER_KEY', 'CONSUMER_KEY_HERE');
-define('CONSUMER_SECRET', 'CONSUMER_SECRET_HERE');
-define('OAUTH_TOKEN', 'OAUTH_TOKEN_HERE');
-define('OAUTH_TOKEN_SECRET', 'OAUTH_TOKEN_SECRET_HERE');
-define('OAUTH_CALLBACK', 'http://example.com/twitteroauth/callback.php');
-```
+#Install
 
 Requires https://github.com/marcj/php-rest-service
 
-Install php-rest-service with Composer:
+Install twitter-rest with Composer:
 
- - https://packagist.org/packages/marcj/php-rest-service.
+ - https://packagist.org/packages/mutantlabs/twitter-rest
  - More information available under https://packagist.org/.
 
 Create a `composer.json`:
@@ -29,7 +17,7 @@ Create a `composer.json`:
 ```json
 {
     "require": {
-        "marcj/php-rest-service": "*"
+        "mutantlabs/twitter-rest": "dev-master"
     }
 }
 ```
@@ -40,8 +28,37 @@ and run
 $ wget http://getcomposer.org/composer.phar
 $ php composer.phar install
 ```
+Requirements
+------------
 
-#TwitterRestAPI Class usage
+ - PHP 5.3 and above.
+ - PHPUnit to execute the test suite.
+ - Setup PATH_INFO in mod_rewrite (.htaccess) or other webserver configuration
+
+Example:
+```
+//apache .htaccess
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+```
+
+#Config
+
+rename config.sample.php to config.php
+
+Set your config.php (uses twitteroauth from https://github.com/abraham/twitteroauth)
+
+```php
+define('CONSUMER_KEY', 'CONSUMER_KEY_HERE');
+define('CONSUMER_SECRET', 'CONSUMER_SECRET_HERE');
+define('OAUTH_TOKEN', 'OAUTH_TOKEN_HERE');
+define('OAUTH_TOKEN_SECRET', 'OAUTH_TOKEN_SECRET_HERE');
+define('OAUTH_CALLBACK', 'http://example.com/twitteroauth/callback.php');
+```
+
+#Example use of TwitterRestAPI
 
 Include TwitterRestAPI
 
@@ -73,21 +90,6 @@ Note - to use getCachedUserStatus() - you need to make your apache server the ow
 ```bash
 sudo chown -R www-data:www-data twitter_result.data
 ```
-
-Requirements
-------------
-
- - PHP 5.3 and above.
- - PHPUnit to execute the test suite.
- - Setup PATH_INFO in mod_rewrite (.htaccess) or other webserver configuration
-
-Example:
-```
-//apache .htaccess
-RewriteEngine On
-RewriteRule (.+) index.php/$1 [L]
-```
-
 API Method using php-rest-service
 ----------
 
