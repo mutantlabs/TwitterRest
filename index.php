@@ -9,7 +9,7 @@
 namespace TwitterRest;
 require_once('config.php');
 require_once('vendor/autoload.php');
-
+require "TwitterRest/TwitterRestAPI.php";
 use TwitterRest\TwitterRestAPI;
 
 TwitterRestAPI::create('/')

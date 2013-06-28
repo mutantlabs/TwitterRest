@@ -60,15 +60,19 @@ define('OAUTH_CALLBACK', 'http://example.com/twitteroauth/callback.php');
 
 #Example use of TwitterRestAPI
 
-Include TwitterRestAPI
+include the vendor/autoload.php to make the class in your script available.
 
 ```php
-require 'TwitterRestAPI.php';
+include 'vendor/autoload.php';
 ```
+
+##Basic use:
 
 Construct new TwitterRestAPI
 
 ```php
+use TwitterRest\TwitterRestAPI;
+require_once('config.php');
 $twitterRestApi = new TwitterRestAPI();
 ```
 
@@ -90,13 +94,13 @@ Note - to use getCachedUserStatus() - you need to make your apache server the ow
 ```bash
 sudo chown -R www-data:www-data twitter_result.data
 ```
-API Method using php-rest-service
+#Create a REST API Method using php-rest-service
 ----------
 
 ```php
-namespace twitterRestAPI;
-require "TwitterRestAPI.php";
-use twitterRestAPI\TwitterRestAPI;
+
+use TwitterRest\TwitterRestAPI;
+require_once('config.php');
 
 TwitterRestAPI::create('/')
     ->addGetRoute('', function(){
