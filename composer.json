@@ -1,5 +1,15 @@
 {
     "name": "mutantlabs/twitter-rest",
+    "description": "A simple Class to interface with Twitter API v1.1 using OAuth, and return tweets as JSON via a get method. Uses RestService and twitteroauth",
+    "keywords": ["Twitter","OAuth","REST", "RESTful", "php", "API"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mutant Labs",
+            "email": "info@mutantlabs.com",
+            "homepage": "http://mutantlabs.com"
+        }
+    ],
     "require": {
         "marcj/php-rest-service": "*"
     }
